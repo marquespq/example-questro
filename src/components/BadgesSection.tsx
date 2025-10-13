@@ -11,35 +11,60 @@ export function BadgesSection() {
   const { updateProgress, checkAndUnlockBadges, unlockedBadges, getProgress } =
     useBadges();
   const [selectedBadge, setSelectedBadge] = useState(badges[0]);
+  const [lastUnlocked, setLastUnlocked] = useState<(typeof badges)[0] | null>(
+    null
+  );
+
+  // Função auxiliar para atualizar progresso por tipo de condição
+  const updateProgressByType = (conditionType: string, value: number) => {
+    // Encontra todos os badges que têm essa condição
+    badges.forEach((badge) => {
+      const hasCondition = badge.conditions.some(
+        (c) => c.type === conditionType
+      );
+      if (hasCondition) {
+        const currentProgress = getProgress(badge.id);
+        const newValue = (currentProgress?.current || 0) + value;
+        updateProgress(badge.id, newValue);
+      }
+    });
+
+    // Verifica se algum badge foi desbloqueado
+    const newlyUnlocked = checkAndUnlockBadges();
+    if (newlyUnlocked.length > 0) {
+      const unlockedBadge = badges.find(
+        (b) => b.id === newlyUnlocked[0].badgeId
+      );
+      if (unlockedBadge) {
+        setLastUnlocked(unlockedBadge);
+        setTimeout(() => setLastUnlocked(null), 3000);
+      }
+    }
+  };
 
   const simulateActions = () => {
     // Simula completar uma ação
-    updateProgress("actions-completed", 1);
-    checkAndUnlockBadges();
+    updateProgressByType("actions-completed", 1);
   };
 
   const simulatePoints = () => {
     // Simula ganhar pontos
-    updateProgress("points-earned", 25);
-    checkAndUnlockBadges();
+    updateProgressByType("points-earned", 25);
   };
 
   const simulateStreak = () => {
     // Simula streak
-    const current = getProgress("streak-count")?.current || 0;
-    updateProgress("streak-count", current + 1);
-    checkAndUnlockBadges();
+    updateProgressByType("streak-count", 1);
   };
 
   const getBadgeProgress = (badgeId: string) => {
     const badge = badges.find((b) => b.id === badgeId);
     if (!badge) return { current: 0, target: 0, percentage: 0 };
 
-    const condition = badge.conditions[0];
-    const progress = getProgress(condition.type);
+    const progress = getProgress(badgeId);
     const current = progress?.current || 0;
-    const target = condition.value;
-    const percentage = Math.min((current / target) * 100, 100);
+    const target = progress?.target || 0;
+    const percentage = target > 0 ? Math.min((current / target) * 100, 100) : 0;
 
     return { current, target, percentage };
   };
@@ -115,16 +140,61 @@ export function BadgesSection() {
                 🔥 Increase Streak
               </button>
               <button
-                onClick={() => {
-                  updateProgress("level-reached", 10);
-                  checkAndUnlockBadges();
-                }}
+                onClick={() => updateProgressByType("level-reached", 10)}
                 className="action-button"
               >
                 📈 Reach Level 10
               </button>
             </div>
           </div>
+
+          {/* Notificação de Badge Desbloqueado */}
+          {lastUnlocked && (
+            <div
+              style={{
+                marginBottom: "24px",
+                padding: "16px",
+                backgroundColor: "#f0fdf4",
+                border: "2px solid #10b981",
+                borderRadius: "12px",
+                animation: "slideInDown 0.3s ease-out",
+                boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                <div style={{ fontSize: "32px" }}>{lastUnlocked.icon}</div>
+                <div style={{ flex: 1 }}>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "#15803d",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    🎉 Badge Unlocked!
+                  </div>
+                  <div style={{ fontSize: "13px", color: "#16a34a" }}>
+                    {lastUnlocked.name}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "24px",
+                    animation: "bounce 0.5s ease-in-out",
+                  }}
+                >
+                  ✨
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="badge-showcase">
             <BadgeGrid badges={badges} />
