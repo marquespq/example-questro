@@ -544,7 +544,9 @@ function CourseModule({ course, module }) {
                 }}
               >
                 <img
-                  src={`/screenshots/${selected.id}.svg`}
+                  src={`${import.meta.env.BASE_URL}screenshots/${
+                    selected.id
+                  }.svg`}
                   alt={`${selected.name} Screenshot`}
                   style={{
                     width: "100%",
@@ -556,11 +558,12 @@ function CourseModule({ course, module }) {
                     const target = e.target as HTMLImageElement;
                     target.style.display = "none";
                     const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.fallback-text')) {
-                      const fallback = document.createElement('div');
-                      fallback.className = 'fallback-text';
-                      fallback.style.cssText = 'color: rgba(255,255,255,0.8); text-align: center; font-size: 14px;';
-                      fallback.textContent = `Preview image: /screenshots/${selected.id}.svg`;
+                    if (parent && !parent.querySelector(".fallback-text")) {
+                      const fallback = document.createElement("div");
+                      fallback.className = "fallback-text";
+                      fallback.style.cssText =
+                        "color: rgba(255,255,255,0.8); text-align: center; font-size: 14px;";
+                      fallback.textContent = `Preview image not found`;
                       parent.appendChild(fallback);
                     }
                   }}
