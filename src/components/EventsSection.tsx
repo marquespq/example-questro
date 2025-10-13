@@ -12,57 +12,90 @@ type EventLog = {
 };
 
 export function EventsSection() {
-  const { addPoints } = usePoints();
-  const { checkAndUnlockBadges } = useBadges();
+  const { addPoints, balance } = usePoints();
+  const { checkAndUnlockBadges, unlockedBadges } = useBadges();
   const { startQuest, availableQuests } = useQuests();
   const [events, setEvents] = useState<EventLog[]>([]);
   const [selectedModule, setSelectedModule] = useState<
     "all" | "points" | "badges" | "quests"
   >("all");
 
+  // Função helper para logar eventos
+  const logEvent = (module: string, event: string, data: unknown) => {
+    setEvents((prev) => [
+      ...prev,
+      {
+        id: Date.now() + Math.random(), // Garante ID único
+        module,
+        event,
+        data: JSON.stringify(data, null, 2),
+        time: new Date().toLocaleTimeString(),
+      },
+    ]);
+  };
+
   // Event listeners examples
   useEffect(() => {
-    const logEvent = (module: string, event: string, data: unknown) => {
-      setEvents((prev) => [
-        ...prev,
-        {
-          id: Date.now(),
-          module,
-          event,
-          data: JSON.stringify(data, null, 2),
-          time: new Date().toLocaleTimeString(),
-        },
-      ]);
-    };
-
-    // Points events are handled through state changes
-    // Badges events
-    // Quest events
-    
-    // Log a sample event to demonstrate functionality
+    // Log initial mount
     logEvent("system", "component:mounted", { timestamp: Date.now() });
-
-    return () => {
-      // Cleanup if needed
-    };
   }, []);
 
   const triggerEvent = (type: string) => {
     switch (type) {
-      case "points-add":
-        addPoints(50, {
+      case "points-add": {
+        const pointsAdded = 50;
+        addPoints(pointsAdded, {
           action: "event-demo",
           description: "Triggered from Events section",
         });
+
+        // Log o evento
+        logEvent("points", "points:added", {
+          amount: pointsAdded,
+          newBalance: balance + pointsAdded,
+          reason: {
+            action: "event-demo",
+            description: "Triggered from Events section",
+          },
+        });
         break;
-      case "badge-check":
-        checkAndUnlockBadges();
+      }
+      case "badge-check": {
+        const newlyUnlocked = checkAndUnlockBadges();
+
+        logEvent("badges", "badges:checked", {
+          totalUnlocked: unlockedBadges.length,
+          newlyUnlocked: newlyUnlocked.length,
+          badgeIds: newlyUnlocked.map((b) => b.badgeId),
+        });
+
+        // Log cada badge desbloqueado
+        newlyUnlocked.forEach((badge) => {
+          logEvent("badges", "badge:unlocked", {
+            badgeId: badge.badgeId,
+            unlockedAt: badge.unlockedAt,
+          });
+        });
         break;
-      case "quest-start":
+      }
+      case "quest-start": {
         if (availableQuests.length > 0) {
-          startQuest(availableQuests[0].id);
+          const quest = availableQuests[0];
+          startQuest(quest.id);
+
+          logEvent("quests", "quest:started", {
+            questId: quest.id,
+            title: quest.title,
+            difficulty: quest.difficulty,
+            objectives: quest.objectives.length,
+          });
+        } else {
+          logEvent("quests", "quest:error", {
+            error: "No available quests to start",
+          });
         }
         break;
+      }
     }
   };
 
