@@ -22,7 +22,7 @@ export function EventsSection() {
 
   // Event listeners examples
   useEffect(() => {
-    const _logEvent = (module: string, event: string, data: unknown) => {
+    const logEvent = (module: string, event: string, data: unknown) => {
       setEvents((prev) => [
         ...prev,
         {
@@ -38,6 +38,9 @@ export function EventsSection() {
     // Points events are handled through state changes
     // Badges events
     // Quest events
+    
+    // Log a sample event to demonstrate functionality
+    logEvent("system", "component:mounted", { timestamp: Date.now() });
 
     return () => {
       // Cleanup if needed
@@ -69,25 +72,6 @@ export function EventsSection() {
     { id: "badges", name: "Badges", icon: "🏆", color: "#10b981" },
     { id: "quests", name: "Quests", icon: "🎯", color: "#f59e0b" },
   ];
-
-  // Available event types for reference
-  const _eventTypes = {
-    points: [
-      { event: "points:added", description: "When points are added" },
-      { event: "points:subtracted", description: "When points are spent" },
-      { event: "points:changed", description: "On any balance change" },
-    ],
-    badges: [
-      { event: "badge:unlocked", description: "When badge is unlocked" },
-      { event: "badge:progress", description: "When progress updates" },
-    ],
-    quests: [
-      { event: "quest:started", description: "When quest begins" },
-      { event: "quest:completed", description: "When quest finishes" },
-      { event: "quest:failed", description: "When quest fails" },
-      { event: "objective:completed", description: "When objective done" },
-    ],
-  };
 
   const filteredEvents =
     selectedModule === "all"
