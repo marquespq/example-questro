@@ -200,9 +200,31 @@
 /* Module Section */
 .module-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(420px, 480px) 1fr;
   gap: 48px;
   margin-bottom: 48px;
+}
+
+/* Integration Section específica - coluna menor para não tremer */
+.integration-section {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+/* Showcase Section - Layout especial */
+.showcase-section {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.showcase-content {
+  display: grid;
+  grid-template-columns: minmax(420px, 480px) 1fr;
+  gap: 48px;
 }
 
 .module-demo {
@@ -369,6 +391,7 @@
   border-radius: 16px;
   color: #fff;
   text-align: center;
+  overflow: hidden;
 }
 
 .showcase-grid {
@@ -406,6 +429,7 @@
   border-radius: 20px;
   color: #fff;
   margin-bottom: 24px;
+  overflow: hidden;
 }
 
 .showcase-stats {
@@ -477,6 +501,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-height: 600px;
+  overflow: hidden;
 }
 
 .code-title {
@@ -515,6 +541,8 @@
   max-width: 100%;
   text-align: left;
   white-space: pre;
+  min-height: 400px;
+  max-height: 600px;
 }
 
 .code-preview {
@@ -592,7 +620,9 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .module-section {
+  .module-section,
+  .integration-section,
+  .showcase-section {
     grid-template-columns: 1fr;
     gap: 32px;
   }
@@ -720,15 +750,18 @@
   }
 
   .showcase-hero {
-    padding: 20px;
+    padding: 16px;
   }
 
   .showcase-details {
-    padding: 24px;
+    padding: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 16px;
   }
 
   .showcase-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 }
@@ -746,5 +779,9 @@
   .tab {
     flex: 1;
     min-width: calc(50% - 4px);
+  }
+
+  .showcase-stats {
+    grid-template-columns: 1fr;
   }
 }

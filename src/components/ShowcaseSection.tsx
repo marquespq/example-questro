@@ -38,7 +38,6 @@ export function ShowcaseSection() {
       stats: {
         users: "10K+ learners",
         points: "5M+ XP earned",
-        badges: "50+ achievements",
       },
       complexity: "intermediate",
       tags: ["Education", "Daily Streaks", "Multiplayer"],
@@ -77,7 +76,6 @@ function LessonComplete() {
       stats: {
         users: "5K+ athletes",
         points: "100K+ workouts logged",
-        badges: "30+ fitness goals",
       },
       complexity: "beginner",
       tags: ["Health", "Fitness", "Challenges"],
@@ -118,7 +116,6 @@ function WorkoutLogger() {
       stats: {
         users: "8K+ productive users",
         points: "2M+ tasks completed",
-        badges: "25+ productivity badges",
       },
       complexity: "beginner",
       tags: ["Productivity", "Tasks", "Teams"],
@@ -159,7 +156,6 @@ function TaskItem({ task }) {
       stats: {
         users: "50K+ customers",
         points: "10M+ loyalty points",
-        badges: "15+ tier levels",
       },
       complexity: "intermediate",
       tags: ["E-commerce", "Loyalty", "Rewards"],
@@ -199,7 +195,6 @@ function CheckoutSuccess({ order }) {
       stats: {
         users: "100K+ creators",
         points: "50M+ interactions",
-        badges: "40+ creator levels",
       },
       complexity: "advanced",
       tags: ["Social", "Content", "Viral"],
@@ -245,7 +240,6 @@ function PostInteraction({ post, action }) {
       stats: {
         users: "25K+ students",
         points: "5M+ lessons completed",
-        badges: "100+ certifications",
       },
       complexity: "intermediate",
       tags: ["Education", "Courses", "Certificates"],
@@ -453,6 +447,7 @@ function CourseModule({ course, module }) {
                       fontSize: "24px",
                       fontWeight: 700,
                       marginBottom: "4px",
+                      textAlign: "center",
                     }}
                   >
                     {value}
@@ -462,6 +457,7 @@ function CourseModule({ course, module }) {
                       fontSize: "12px",
                       opacity: 0.9,
                       textTransform: "uppercase",
+                      textAlign: "center",
                     }}
                   >
                     {key}

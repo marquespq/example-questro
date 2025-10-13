@@ -374,7 +374,7 @@ io.on('connection', (socket) => {
   };
 
   return (
-    <div className="module-section">
+    <div className="integration-section">
       <div className="module-demo">
         <div className="demo-card">
           <div className="demo-header">
@@ -538,10 +538,7 @@ io.on('connection', (socket) => {
 
         <div className="code-block">
           <div className="code-label">{selected.name}</div>
-          <pre
-            className="code-snippet"
-            style={{ maxHeight: "500px", overflowY: "auto" }}
-          >
+          <pre className="code-snippet">
             {codeExamples[selectedIntegration]}
           </pre>
         </div>
