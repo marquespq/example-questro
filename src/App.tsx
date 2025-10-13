@@ -13,6 +13,7 @@ import { LeaderboardSection } from "./components/LeaderboardSection";
 import { StorageSection } from "./components/StorageSection";
 import { EventsSection } from "./components/EventsSection";
 import { IntegrationsSection } from "./components/IntegrationsSection";
+import { ShowcaseSection } from "./components/ShowcaseSection";
 import { userId, badges, quests, leaderboardEntries } from "./data/mockData";
 import "./styles/responsive.css";
 
@@ -25,6 +26,7 @@ function ComponentsShowcase() {
     | "storage"
     | "events"
     | "integrations"
+    | "showcase"
   >("points");
 
   return (
@@ -84,6 +86,12 @@ function ComponentsShowcase() {
           >
             🔌 Integrations
           </button>
+          <button
+            className={activeTab === "showcase" ? "tab tab-active" : "tab"}
+            onClick={() => setActiveTab("showcase")}
+          >
+            🌟 Showcase
+          </button>
         </div>
 
         <div className="tab-content">
@@ -94,6 +102,7 @@ function ComponentsShowcase() {
           {activeTab === "storage" && <StorageSection />}
           {activeTab === "events" && <EventsSection />}
           {activeTab === "integrations" && <IntegrationsSection />}
+          {activeTab === "showcase" && <ShowcaseSection />}
         </div>
       </section>
 
