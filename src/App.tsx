@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { PointsProvider } from "questro/points";
 import { BadgesProvider } from "questro/badges";
 import { QuestsProvider } from "questro/quests";
@@ -6,156 +6,131 @@ import { LeaderboardProvider } from "questro/leaderboard";
 import { LevelsProvider } from "questro/levels";
 import { NotificationsProvider } from "questro/notifications";
 import { DemoStreaksProvider } from "./components/DemoStreaksProvider";
-import { Hero } from "./components/Hero";
-import { Features } from "./components/Features";
 import { Footer } from "./components/Footer";
-import { PointsSection } from "./components/PointsSection";
-import { BadgesSection } from "./components/BadgesSection";
-import { QuestsSection } from "./components/QuestsSection";
-import { LeaderboardSection } from "./components/LeaderboardSection";
-import { LevelsSection } from "./components/LevelsSection";
-import { StreaksSection } from "./components/StreaksSection";
-import { NotificationsSection } from "./components/NotificationsSection";
-import { StorageSection } from "./components/StorageSection";
-import { EventsSection } from "./components/EventsSection";
-import { IntegrationsSection } from "./components/IntegrationsSection";
+import { QuickStartSection } from "./components/QuickStartSection";
+import { ModulesGrid } from "./components/ModulesGrid";
+import { LivePlayground } from "./components/LivePlayground";
 import { ShowcaseSection } from "./components/ShowcaseSection";
 import { userId, badges, quests, leaderboardEntries } from "./data/mockData";
+import { QUESTRO_VERSION } from "./utils/version";
 import "./styles/responsive.css";
 
 function ComponentsShowcase() {
-  // Restore active tab from sessionStorage after reload
-  const savedTab = sessionStorage.getItem("questro_active_tab") as
-    | "points"
-    | "badges"
-    | "quests"
-    | "leaderboard"
-    | "levels"
-    | "streaks"
-    | "notifications"
-    | "storage"
-    | "events"
-    | "integrations"
-    | "showcase"
-    | null;
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Height of fixed nav
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-  const [activeTab, setActiveTab] = useState<
-    | "points"
-    | "badges"
-    | "quests"
-    | "leaderboard"
-    | "levels"
-    | "streaks"
-    | "notifications"
-    | "storage"
-    | "events"
-    | "integrations"
-    | "showcase"
-  >(savedTab || "points");
-
-  // Clear saved tab after restoring
-  useEffect(() => {
-    if (savedTab) {
-      sessionStorage.removeItem("questro_active_tab");
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
-  }, [savedTab]);
+  };
+
+  useEffect(() => {
+    // Handle hash navigation on load
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => scrollToSection(id), 100);
+    }
+  }, []);
 
   return (
     <div className="app-container">
-      <Hero />
-      <Features />
-
-      <section className="interactive">
-        <h2 className="interactive-title">Interactive Components</h2>
-        <p className="interactive-subtitle">
-          Try all features live. No installation needed.
-        </p>
-
-        <div
-          className="tabs"
-          style={{ overflowX: "auto", whiteSpace: "nowrap" }}
-        >
-          <button
-            className={activeTab === "points" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("points")}
-          >
-            📊 Points
-          </button>
-          <button
-            className={activeTab === "badges" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("badges")}
-          >
-            🏆 Badges
-          </button>
-          <button
-            className={activeTab === "quests" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("quests")}
-          >
-            🎯 Quests
-          </button>
-          <button
-            className={activeTab === "leaderboard" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("leaderboard")}
-          >
-            🏅 Leaderboard
-          </button>
-          <button
-            className={activeTab === "levels" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("levels")}
-          >
-            ⬆️ Levels/XP
-          </button>
-          <button
-            className={activeTab === "streaks" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("streaks")}
-          >
-            🔥 Streaks
-          </button>
-          <button
-            className={activeTab === "notifications" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("notifications")}
-          >
-            🔔 Notifications
-          </button>
-          <button
-            className={activeTab === "storage" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("storage")}
-          >
-            💾 Storage
-          </button>
-          <button
-            className={activeTab === "events" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("events")}
-          >
-            ⚡ Events
-          </button>
-          <button
-            className={activeTab === "integrations" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("integrations")}
-          >
-            🔌 Integrations
-          </button>
-          <button
-            className={activeTab === "showcase" ? "tab tab-active" : "tab"}
-            onClick={() => setActiveTab("showcase")}
-          >
-            🌟 Showcase
-          </button>
+      {/* Fixed Navigation */}
+      <nav className="fixed-nav">
+        <div className="fixed-nav-content">
+          <div className="nav-logo">questro</div>
+          <div className="nav-links">
+            <button onClick={() => scrollToSection("quickstart")}>
+              Quick Start
+            </button>
+            <button onClick={() => scrollToSection("modules")}>Modules</button>
+            <button onClick={() => scrollToSection("playground")}>
+              Playground
+            </button>
+            <button onClick={() => scrollToSection("showcase")}>
+              Examples
+            </button>
+          </div>
+          <div className="nav-actions">
+            <button
+              className="nav-github"
+              onClick={() =>
+                window.open("https://github.com/marquespq/questro", "_blank")
+              }
+            >
+              GitHub
+            </button>
+          </div>
         </div>
+      </nav>
 
-        <div className="tab-content">
-          {activeTab === "points" && <PointsSection />}
-          {activeTab === "badges" && <BadgesSection />}
-          {activeTab === "quests" && <QuestsSection />}
-          {activeTab === "leaderboard" && <LeaderboardSection />}
-          {activeTab === "levels" && <LevelsSection />}
-          {activeTab === "streaks" && <StreaksSection />}
-          {activeTab === "notifications" && <NotificationsSection />}
-          {activeTab === "storage" && <StorageSection />}
-          {activeTab === "events" && <EventsSection />}
-          {activeTab === "integrations" && <IntegrationsSection />}
-          {activeTab === "showcase" && <ShowcaseSection />}
+      {/* Hero */}
+      <header className="hero" id="hero">
+        <div className="hero-content">
+          <div className="badge">🎮 v{QUESTRO_VERSION}</div>
+          <h1 className="hero-title">questro</h1>
+          <p className="hero-subtitle">
+            Add gamification to your React app in minutes.
+            <br />
+            Points, badges, quests, leaderboards, and streaks - all in one
+            simple library.
+          </p>
+          <div className="hero-buttons">
+            <button
+              className="cta-button"
+              onClick={() => scrollToSection("quickstart")}
+            >
+              Get Started →
+            </button>
+            <button
+              className="secondary-button"
+              onClick={() =>
+                window.open("https://www.npmjs.com/package/questro", "_blank")
+              }
+            >
+              npm install questro
+            </button>
+          </div>
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <div className="stat-value">7</div>
+              <div className="stat-label">Core Modules</div>
+            </div>
+            <div className="hero-stat">
+              <div className="stat-value">&lt;5KB</div>
+              <div className="stat-label">Gzipped</div>
+            </div>
+            <div className="hero-stat">
+              <div className="stat-value">100%</div>
+              <div className="stat-label">TypeScript</div>
+            </div>
+          </div>
         </div>
+      </header>
+
+      {/* Quick Start */}
+      <section id="quickstart" className="section-wrapper">
+        <QuickStartSection />
+      </section>
+
+      {/* Modules Grid */}
+      <section id="modules" className="section-wrapper">
+        <ModulesGrid />
+      </section>
+
+      {/* Live Playground */}
+      <section id="playground" className="section-wrapper">
+        <LivePlayground />
+      </section>
+
+      {/* Showcase */}
+      <section id="showcase" className="section-wrapper">
+        <ShowcaseSection />
       </section>
 
       <Footer />
