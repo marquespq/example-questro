@@ -24,7 +24,8 @@ export function ShowcaseSection() {
     {
       id: "language-learning",
       name: "Language Learning App",
-      description: "Duolingo-style gamification with daily streaks, XP, and achievements",
+      description:
+        "Duolingo-style gamification with daily streaks, XP, and achievements",
       thumbnail: "🗣️",
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       features: [
@@ -183,7 +184,7 @@ function CheckoutSuccess({ order }) {
 }`,
     },
     {
-      id: "social-app",
+      id: "social-media",
       name: "Social Media App",
       description: "Engagement-driven social platform with gamification",
       thumbnail: "📱",
@@ -228,9 +229,10 @@ function PostInteraction({ post, action }) {
 }`,
     },
     {
-      id: "education",
+      id: "learning-platform",
       name: "Online Course Platform",
-      description: "Learning platform with progress tracking and certifications",
+      description:
+        "Learning platform with progress tracking and certifications",
       thumbnail: "🎓",
       gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
       features: [
@@ -300,11 +302,19 @@ function CourseModule({ course, module }) {
             }}
           >
             <div style={{ fontSize: "48px", marginBottom: "12px" }}>🚀</div>
-            <h2 style={{ fontSize: "24px", fontWeight: 700, marginBottom: "8px", margin: 0 }}>
+            <h2
+              style={{
+                fontSize: "24px",
+                fontWeight: 700,
+                marginBottom: "8px",
+                margin: 0,
+              }}
+            >
               Build Amazing Apps
             </h2>
             <p style={{ fontSize: "16px", opacity: 0.9, margin: "8px 0 0 0" }}>
-              See how developers are using Questro to create engaging, gamified experiences
+              See how developers are using Questro to create engaging, gamified
+              experiences
             </p>
           </div>
 
@@ -324,7 +334,9 @@ function CourseModule({ course, module }) {
                 style={{
                   padding: "0",
                   background: selectedApp === app.id ? app.gradient : "#fff",
-                  border: `3px solid ${selectedApp === app.id ? "transparent" : "#e2e8f0"}`,
+                  border: `3px solid ${
+                    selectedApp === app.id ? "transparent" : "#e2e8f0"
+                  }`,
                   borderRadius: "16px",
                   textAlign: "left",
                   cursor: "pointer",
@@ -334,22 +346,34 @@ function CourseModule({ course, module }) {
                     selectedApp === app.id
                       ? "0 10px 30px rgba(0,0,0,0.15)"
                       : "0 2px 8px rgba(0,0,0,0.05)",
-                  transform: selectedApp === app.id ? "scale(1.02)" : "scale(1)",
+                  transform:
+                    selectedApp === app.id ? "scale(1.02)" : "scale(1)",
                 }}
               >
                 <div
                   style={{
                     padding: "20px",
-                    background: selectedApp === app.id ? "rgba(255,255,255,0.95)" : "#fff",
-                    backdropFilter: selectedApp === app.id ? "blur(10px)" : "none",
+                    background:
+                      selectedApp === app.id
+                        ? "rgba(255,255,255,0.95)"
+                        : "#fff",
+                    backdropFilter:
+                      selectedApp === app.id ? "blur(10px)" : "none",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "start", marginBottom: "12px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "start",
+                      marginBottom: "12px",
+                    }}
+                  >
                     <div
                       style={{
                         fontSize: "40px",
                         marginRight: "12px",
-                        filter: selectedApp === app.id ? "none" : "grayscale(50%)",
+                        filter:
+                          selectedApp === app.id ? "none" : "grayscale(50%)",
                       }}
                     >
                       {app.thumbnail}
@@ -391,7 +415,9 @@ function CourseModule({ course, module }) {
                   >
                     {app.description}
                   </div>
-                  <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                  <div
+                    style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}
+                  >
                     {app.tags.map((tag) => (
                       <span
                         key={tag}
@@ -423,10 +449,24 @@ function CourseModule({ course, module }) {
               marginBottom: "24px",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "24px" }}>
-              <div style={{ fontSize: "64px", marginRight: "20px" }}>{selected.thumbnail}</div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "24px",
+              }}
+            >
+              <div style={{ fontSize: "64px", marginRight: "20px" }}>
+                {selected.thumbnail}
+              </div>
               <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: "28px", fontWeight: 700, margin: "0 0 8px 0" }}>
+                <h3
+                  style={{
+                    fontSize: "28px",
+                    fontWeight: 700,
+                    margin: "0 0 8px 0",
+                  }}
+                >
                   {selected.name}
                 </h3>
                 <p style={{ fontSize: "16px", opacity: 0.95, margin: 0 }}>
@@ -455,14 +495,77 @@ function CourseModule({ course, module }) {
                     textAlign: "center",
                   }}
                 >
-                  <div style={{ fontSize: "24px", fontWeight: 700, marginBottom: "4px" }}>
+                  <div
+                    style={{
+                      fontSize: "24px",
+                      fontWeight: 700,
+                      marginBottom: "4px",
+                    }}
+                  >
                     {value}
                   </div>
-                  <div style={{ fontSize: "12px", opacity: 0.9, textTransform: "uppercase" }}>
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      opacity: 0.9,
+                      textTransform: "uppercase",
+                    }}
+                  >
                     {key}
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Screenshot Preview */}
+            <div style={{ marginBottom: "24px" }}>
+              <div
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  marginBottom: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                App Preview
+              </div>
+              <div
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "12px",
+                  padding: "16px",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  minHeight: "200px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src={`/screenshots/${selected.id}.svg`}
+                  alt={`${selected.name} Screenshot`}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "8px",
+                    display: "block",
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                    const parent = target.parentElement;
+                    if (parent && !parent.querySelector('.fallback-text')) {
+                      const fallback = document.createElement('div');
+                      fallback.className = 'fallback-text';
+                      fallback.style.cssText = 'color: rgba(255,255,255,0.8); text-align: center; font-size: 14px;';
+                      fallback.textContent = `Preview image: /screenshots/${selected.id}.svg`;
+                      parent.appendChild(fallback);
+                    }
+                  }}
+                />
+              </div>
             </div>
 
             {/* Features */}
@@ -478,9 +581,14 @@ function CourseModule({ course, module }) {
               >
                 Key Features
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              >
                 {selected.features.map((feature, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    key={i}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     <div
                       style={{
                         width: "6px",
@@ -490,7 +598,9 @@ function CourseModule({ course, module }) {
                         marginRight: "12px",
                       }}
                     />
-                    <div style={{ fontSize: "14px", opacity: 0.95 }}>{feature}</div>
+                    <div style={{ fontSize: "14px", opacity: 0.95 }}>
+                      {feature}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -504,7 +614,10 @@ function CourseModule({ course, module }) {
 
         <div className="code-block">
           <div className="code-label">{selected.name} - Code Sample</div>
-          <pre className="code-snippet" style={{ maxHeight: "400px", overflowY: "auto" }}>
+          <pre
+            className="code-snippet"
+            style={{ maxHeight: "400px", overflowY: "auto" }}
+          >
             {selected.preview}
           </pre>
         </div>
@@ -548,7 +661,13 @@ function YourFeature() {
               border: "1px solid #e2e8f0",
             }}
           >
-            <div style={{ fontSize: "14px", color: "#0f172a", marginBottom: "16px" }}>
+            <div
+              style={{
+                fontSize: "14px",
+                color: "#0f172a",
+                marginBottom: "16px",
+              }}
+            >
               <strong>Get started in 3 steps:</strong>
             </div>
             <ol
@@ -563,7 +682,10 @@ function YourFeature() {
               <li>
                 <code>npm install questro</code>
               </li>
-              <li>Choose which modules you need (Points, Badges, Quests, Leaderboard)</li>
+              <li>
+                Choose which modules you need (Points, Badges, Quests,
+                Leaderboard)
+              </li>
               <li>Start building! Check our docs for detailed guides</li>
             </ol>
           </div>
