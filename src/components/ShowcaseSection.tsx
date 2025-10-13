@@ -291,16 +291,7 @@ function CourseModule({ course, module }) {
           </div>
 
           {/* Hero Message */}
-          <div
-            style={{
-              marginBottom: "32px",
-              padding: "24px",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              borderRadius: "16px",
-              color: "#fff",
-              textAlign: "center",
-            }}
-          >
+          <div className="showcase-hero">
             <div style={{ fontSize: "48px", marginBottom: "12px" }}>🚀</div>
             <h2
               style={{
@@ -319,35 +310,16 @@ function CourseModule({ course, module }) {
           </div>
 
           {/* App Grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "16px",
-              marginBottom: "32px",
-            }}
-          >
+          <div className="showcase-grid">
             {showcaseApps.map((app) => (
               <button
                 key={app.id}
                 onClick={() => setSelectedApp(app.id)}
+                className={`showcase-card ${
+                  selectedApp === app.id ? "active" : ""
+                }`}
                 style={{
-                  padding: "0",
                   background: selectedApp === app.id ? app.gradient : "#fff",
-                  border: `3px solid ${
-                    selectedApp === app.id ? "transparent" : "#e2e8f0"
-                  }`,
-                  borderRadius: "16px",
-                  textAlign: "left",
-                  cursor: "pointer",
-                  transition: "all 0.3s",
-                  overflow: "hidden",
-                  boxShadow:
-                    selectedApp === app.id
-                      ? "0 10px 30px rgba(0,0,0,0.15)"
-                      : "0 2px 8px rgba(0,0,0,0.05)",
-                  transform:
-                    selectedApp === app.id ? "scale(1.02)" : "scale(1)",
                 }}
               >
                 <div
@@ -441,12 +413,9 @@ function CourseModule({ course, module }) {
 
           {/* Selected App Details */}
           <div
+            className="showcase-details"
             style={{
-              padding: "32px",
               background: selected.gradient,
-              borderRadius: "20px",
-              color: "#fff",
-              marginBottom: "24px",
             }}
           >
             <div
@@ -476,25 +445,9 @@ function CourseModule({ course, module }) {
             </div>
 
             {/* Stats */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "16px",
-                marginBottom: "24px",
-              }}
-            >
+            <div className="showcase-stats">
               {Object.entries(selected.stats).map(([key, value]) => (
-                <div
-                  key={key}
-                  style={{
-                    padding: "16px",
-                    backgroundColor: "rgba(255,255,255,0.15)",
-                    backdropFilter: "blur(10px)",
-                    borderRadius: "12px",
-                    textAlign: "center",
-                  }}
-                >
+                <div key={key} className="showcase-stat-card">
                   <div
                     style={{
                       fontSize: "24px",
