@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PointsProvider } from "questro/points";
 import { BadgesProvider } from "questro/badges";
 import { QuestsProvider } from "questro/quests";
@@ -16,7 +16,10 @@ import { QUESTRO_VERSION } from "./utils/version";
 import "./styles/responsive.css";
 
 function ComponentsShowcase() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false); // Close menu when navigating
     const element = document.getElementById(id);
     if (element) {
       const offset = 80; // Height of fixed nav
@@ -44,7 +47,19 @@ function ComponentsShowcase() {
       <nav className="fixed-nav">
         <div className="fixed-nav-content">
           <div className="nav-logo">questro</div>
-          <div className="nav-links">
+
+          {/* Hamburger Button */}
+          <button
+            className={`hamburger ${mobileMenuOpen ? "active" : ""}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div className={`nav-links ${mobileMenuOpen ? "mobile-open" : ""}`}>
             <button onClick={() => scrollToSection("quickstart")}>
               Quick Start
             </button>
@@ -55,7 +70,17 @@ function ComponentsShowcase() {
             <button onClick={() => scrollToSection("showcase")}>
               Examples
             </button>
+            <button
+              className="nav-github-mobile"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.open("https://github.com/marquespq/questro", "_blank");
+              }}
+            >
+              GitHub
+            </button>
           </div>
+
           <div className="nav-actions">
             <button
               className="nav-github"
