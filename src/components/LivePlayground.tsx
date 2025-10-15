@@ -7,7 +7,16 @@ import { useLevels } from "questro/levels";
 import { useLeaderboard } from "questro/leaderboard";
 import { badges } from "../data/mockData";
 
-type TabType = "points" | "quests" | "badges" | "levels" | "leaderboard";
+type TabType =
+  | "points"
+  | "quests"
+  | "badges"
+  | "levels"
+  | "leaderboard"
+  | "combo"
+  | "daily-challenge"
+  | "achievement-toast"
+  | "progress-rings";
 
 export function LivePlayground() {
   const { balance, addPoints } = usePoints();
@@ -183,8 +192,9 @@ export function LivePlayground() {
       <div
         style={{
           display: "flex",
-          gap: "8px",
-          marginBottom: "32px",
+          flexWrap: "wrap",
+          gap: "clamp(4px, 1vw, 8px)",
+          marginBottom: "clamp(16px, 4vh, 32px)",
           borderBottom: "2px solid #e2e8f0",
           paddingBottom: "0",
         }}
@@ -192,8 +202,8 @@ export function LivePlayground() {
         <button
           onClick={() => setActiveTab("points")}
           style={{
-            padding: "12px 24px",
-            fontSize: "14px",
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
             fontWeight: 600,
             background: activeTab === "points" ? "#6366f1" : "transparent",
             color: activeTab === "points" ? "#fff" : "#64748b",
@@ -206,6 +216,7 @@ export function LivePlayground() {
                 ? "2px solid #6366f1"
                 : "2px solid transparent",
             marginBottom: "-2px",
+            whiteSpace: "nowrap",
           }}
         >
           🎯 Points System
@@ -213,8 +224,8 @@ export function LivePlayground() {
         <button
           onClick={() => setActiveTab("quests")}
           style={{
-            padding: "12px 24px",
-            fontSize: "14px",
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
             fontWeight: 600,
             background: activeTab === "quests" ? "#6366f1" : "transparent",
             color: activeTab === "quests" ? "#fff" : "#64748b",
@@ -227,6 +238,7 @@ export function LivePlayground() {
                 ? "2px solid #6366f1"
                 : "2px solid transparent",
             marginBottom: "-2px",
+            whiteSpace: "nowrap",
           }}
         >
           📋 Quests
@@ -234,8 +246,8 @@ export function LivePlayground() {
         <button
           onClick={() => setActiveTab("badges")}
           style={{
-            padding: "12px 24px",
-            fontSize: "14px",
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
             fontWeight: 600,
             background: activeTab === "badges" ? "#6366f1" : "transparent",
             color: activeTab === "badges" ? "#fff" : "#64748b",
@@ -248,6 +260,7 @@ export function LivePlayground() {
                 ? "2px solid #6366f1"
                 : "2px solid transparent",
             marginBottom: "-2px",
+            whiteSpace: "nowrap",
           }}
         >
           🏆 Badges
@@ -255,8 +268,8 @@ export function LivePlayground() {
         <button
           onClick={() => setActiveTab("levels")}
           style={{
-            padding: "12px 24px",
-            fontSize: "14px",
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
             fontWeight: 600,
             background: activeTab === "levels" ? "#6366f1" : "transparent",
             color: activeTab === "levels" ? "#fff" : "#64748b",
@@ -269,6 +282,7 @@ export function LivePlayground() {
                 ? "2px solid #6366f1"
                 : "2px solid transparent",
             marginBottom: "-2px",
+            whiteSpace: "nowrap",
           }}
         >
           ⭐ Levels
@@ -276,8 +290,8 @@ export function LivePlayground() {
         <button
           onClick={() => setActiveTab("leaderboard")}
           style={{
-            padding: "12px 24px",
-            fontSize: "14px",
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
             fontWeight: 600,
             background: activeTab === "leaderboard" ? "#6366f1" : "transparent",
             color: activeTab === "leaderboard" ? "#fff" : "#64748b",
@@ -290,9 +304,101 @@ export function LivePlayground() {
                 ? "2px solid #6366f1"
                 : "2px solid transparent",
             marginBottom: "-2px",
+            whiteSpace: "nowrap",
           }}
         >
           🥇 Leaderboard
+        </button>
+        <button
+          onClick={() => setActiveTab("combo")}
+          style={{
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
+            fontWeight: 600,
+            background: activeTab === "combo" ? "#6366f1" : "transparent",
+            color: activeTab === "combo" ? "#fff" : "#64748b",
+            border: "none",
+            borderRadius: "8px 8px 0 0",
+            cursor: "pointer",
+            transition: "all 0.2s",
+            borderBottom:
+              activeTab === "combo"
+                ? "2px solid #6366f1"
+                : "2px solid transparent",
+            marginBottom: "-2px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          🔥 Combo
+        </button>
+        <button
+          onClick={() => setActiveTab("daily-challenge")}
+          style={{
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
+            fontWeight: 600,
+            background:
+              activeTab === "daily-challenge" ? "#6366f1" : "transparent",
+            color: activeTab === "daily-challenge" ? "#fff" : "#64748b",
+            border: "none",
+            borderRadius: "8px 8px 0 0",
+            cursor: "pointer",
+            transition: "all 0.2s",
+            borderBottom:
+              activeTab === "daily-challenge"
+                ? "2px solid #6366f1"
+                : "2px solid transparent",
+            marginBottom: "-2px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          🎯 Daily
+        </button>
+        <button
+          onClick={() => setActiveTab("achievement-toast")}
+          style={{
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
+            fontWeight: 600,
+            background:
+              activeTab === "achievement-toast" ? "#6366f1" : "transparent",
+            color: activeTab === "achievement-toast" ? "#fff" : "#64748b",
+            border: "none",
+            borderRadius: "8px 8px 0 0",
+            cursor: "pointer",
+            transition: "all 0.2s",
+            borderBottom:
+              activeTab === "achievement-toast"
+                ? "2px solid #6366f1"
+                : "2px solid transparent",
+            marginBottom: "-2px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          🏆 Toast
+        </button>
+        <button
+          onClick={() => setActiveTab("progress-rings")}
+          style={{
+            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
+            fontSize: "clamp(12px, 2vw, 14px)",
+            fontWeight: 600,
+            background:
+              activeTab === "progress-rings" ? "#6366f1" : "transparent",
+            color: activeTab === "progress-rings" ? "#fff" : "#64748b",
+            border: "none",
+            borderRadius: "8px 8px 0 0",
+            cursor: "pointer",
+            transition: "all 0.2s",
+            borderBottom:
+              activeTab === "progress-rings"
+                ? "2px solid #6366f1"
+                : "2px solid transparent",
+            marginBottom: "-2px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          ⭕ Rings
         </button>
       </div>
 
@@ -1578,7 +1684,6 @@ function LevelTracker() {
                 className="playground-button primary"
                 onClick={() => {
                   // Sync leaderboard score with current points balance
-                  console.log("Current balance:", balance);
                   updateScore("demo-user", balance, "You");
                   show({
                     title: "Score Synced!",

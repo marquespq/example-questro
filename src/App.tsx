@@ -5,6 +5,8 @@ import { QuestsProvider } from "questro/quests";
 import { LeaderboardProvider } from "questro/leaderboard";
 import { LevelsProvider } from "questro/levels";
 import { NotificationsProvider } from "questro/notifications";
+import { ComboProvider } from "questro/combo";
+import { MockDailyChallengeProvider } from "./components/MockDailyChallengeProvider";
 import { DemoStreaksProvider } from "./components/DemoStreaksProvider";
 import { Footer } from "./components/Footer";
 import { QuickStartSection } from "./components/QuickStartSection";
@@ -123,7 +125,7 @@ function ComponentsShowcase() {
           </div>
           <div className="hero-stats">
             <div className="hero-stat">
-              <div className="stat-value">7</div>
+              <div className="stat-value">11</div>
               <div className="stat-label">Core Modules</div>
             </div>
             <div className="hero-stat">
@@ -175,7 +177,11 @@ export default function App() {
                   entries={leaderboardEntries}
                   config={{ userId, metric: "points" }}
                 >
-                  <ComponentsShowcase />
+                  <ComboProvider config={{ userId, maxMultiplier: 5 }}>
+                    <MockDailyChallengeProvider userId={userId}>
+                      <ComponentsShowcase />
+                    </MockDailyChallengeProvider>
+                  </ComboProvider>
                 </LeaderboardProvider>
               </QuestsProvider>
             </BadgesProvider>

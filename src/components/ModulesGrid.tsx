@@ -6,6 +6,10 @@ import { LeaderboardSection } from "./LeaderboardSection";
 import { LevelsSection } from "./LevelsSection";
 import { StreaksSection } from "./StreaksSection";
 import { NotificationsSection } from "./NotificationsSection";
+import { ComboSection } from "./ComboSection";
+import { DailyChallengeSection } from "./DailyChallengeSection";
+import { AchievementToastSection } from "./AchievementToastSection";
+import { ProgressRingsSection } from "./ProgressRingsSection";
 
 type ModuleId =
   | "points"
@@ -14,7 +18,11 @@ type ModuleId =
   | "leaderboard"
   | "levels"
   | "streaks"
-  | "notifications";
+  | "notifications"
+  | "combo"
+  | "daily-challenge"
+  | "achievement-toast"
+  | "progress-rings";
 
 export function ModulesGrid() {
   const [expandedModule, setExpandedModule] = useState<ModuleId | null>(null);
@@ -77,6 +85,42 @@ export function ModulesGrid() {
       description: "Toast notifications for gamification events",
       features: ["Custom messages", "Auto-dismiss", "Event triggers"],
     },
+    {
+      id: "combo" as ModuleId,
+      icon: "🔥",
+      title: "Combo System",
+      description: "Chain actions for multipliers and milestone rewards",
+      features: [
+        "Time-based combos",
+        "Multiplier system",
+        "Milestone celebrations",
+      ],
+    },
+    {
+      id: "daily-challenge" as ModuleId,
+      icon: "📅",
+      title: "Daily Challenge",
+      description: "Daily challenges with streaks and auto-reset",
+      features: [
+        "Auto-generated tasks",
+        "Streak tracking",
+        "Difficulty levels",
+      ],
+    },
+    {
+      id: "achievement-toast" as ModuleId,
+      icon: "🎊",
+      title: "Achievement Toast",
+      description: "Special toast notifications with confetti effects",
+      features: ["Confetti animations", "Custom actions", "Multiple types"],
+    },
+    {
+      id: "progress-rings" as ModuleId,
+      icon: "⭕",
+      title: "Progress Rings",
+      description: "Apple Activity-style concentric progress rings",
+      features: ["Multiple metrics", "Gradient colors", "Animated progress"],
+    },
   ];
 
   const toggleModule = (id: ModuleId) => {
@@ -99,6 +143,14 @@ export function ModulesGrid() {
         return <StreaksSection />;
       case "notifications":
         return <NotificationsSection />;
+      case "combo":
+        return <ComboSection />;
+      case "daily-challenge":
+        return <DailyChallengeSection />;
+      case "achievement-toast":
+        return <AchievementToastSection />;
+      case "progress-rings":
+        return <ProgressRingsSection />;
       default:
         return null;
     }
@@ -107,7 +159,7 @@ export function ModulesGrid() {
   return (
     <div className="modules-section">
       <div className="section-header">
-        <h2 className="section-title">All Modules</h2>
+        <h2 className="section-title">11 Powerful Modules</h2>
         <p className="section-subtitle">
           Click any module to see it in action with live examples and code
         </p>
