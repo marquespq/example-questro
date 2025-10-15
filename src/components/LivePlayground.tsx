@@ -6,6 +6,9 @@ import { useNotifications } from "questro/notifications";
 import { useLevels } from "questro/levels";
 import { useLeaderboard } from "questro/leaderboard";
 import { badges } from "../data/mockData";
+import { ComboSection } from "./ComboSection";
+import { DailyChallengeSection } from "./DailyChallengeSection";
+import { ProgressRingsSection } from "./ProgressRingsSection";
 
 type TabType =
   | "points"
@@ -15,7 +18,6 @@ type TabType =
   | "leaderboard"
   | "combo"
   | "daily-challenge"
-  | "achievement-toast"
   | "progress-rings";
 
 export function LivePlayground() {
@@ -354,29 +356,7 @@ export function LivePlayground() {
         >
           🎯 Daily
         </button>
-        <button
-          onClick={() => setActiveTab("achievement-toast")}
-          style={{
-            padding: "clamp(8px, 2vw, 12px) clamp(12px, 3vw, 24px)",
-            fontSize: "clamp(12px, 2vw, 14px)",
-            fontWeight: 600,
-            background:
-              activeTab === "achievement-toast" ? "#6366f1" : "transparent",
-            color: activeTab === "achievement-toast" ? "#fff" : "#64748b",
-            border: "none",
-            borderRadius: "8px 8px 0 0",
-            cursor: "pointer",
-            transition: "all 0.2s",
-            borderBottom:
-              activeTab === "achievement-toast"
-                ? "2px solid #6366f1"
-                : "2px solid transparent",
-            marginBottom: "-2px",
-            whiteSpace: "nowrap",
-          }}
-        >
-          🏆 Toast
-        </button>
+
         <button
           onClick={() => setActiveTab("progress-rings")}
           style={{
@@ -1754,6 +1734,15 @@ function LeaderboardView() {
           </div>
         </div>
       )}
+
+      {/* Combo Tab */}
+      {activeTab === "combo" && <ComboSection />}
+
+      {/* Daily Challenge Tab */}
+      {activeTab === "daily-challenge" && <DailyChallengeSection />}
+
+      {/* Progress Rings Tab */}
+      {activeTab === "progress-rings" && <ProgressRingsSection />}
     </div>
   );
 }

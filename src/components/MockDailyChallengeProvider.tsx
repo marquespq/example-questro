@@ -20,8 +20,6 @@ function ForceInitialChallenge() {
       const current = service.getCurrentChallenge();
 
       if (!current) {
-        console.log("🔄 No challenge found, forcing generation...");
-
         // HACK: Acessa o state interno diretamente
         // @ts-ignore - accessing private property
         if (service.state) {
@@ -29,21 +27,10 @@ function ForceInitialChallenge() {
           yesterday.setDate(yesterday.getDate() - 1);
           // @ts-ignore
           service.state.lastResetDate = yesterday.toISOString().split("T")[0];
-          console.log("📅 Set lastResetDate to yesterday in memory");
         }
 
         // Agora chama checkReset que vai ver a data mudou
-        const didReset = service.checkReset();
-        console.log("✅ Challenge generated:", didReset);
-
-        if (!didReset) {
-          console.error(
-            "❌ Failed to generate challenge. State:",
-            service.toJSON()
-          );
-        }
-      } else {
-        console.log("✅ Challenge already exists!");
+        service.checkReset();
       }
     }, 100);
 

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDailyChallenge } from "questro/daily-challenge";
 import {
   DailyChallengeCard,
@@ -24,15 +23,6 @@ export function DailyChallengeSection() {
   const { addPoints } = usePoints();
 
   const isCompleted = challenge?.status === "completed";
-
-  // Debug
-  useEffect(() => {
-    console.log("🔍 Hook challenge:", challenge);
-    console.log(
-      "📦 LocalStorage:",
-      JSON.parse(localStorage.getItem("daily-challenge:demo-user") || "null")
-    );
-  }, [challenge]);
 
   // Handler para adicionar progresso
   const handleAddProgress = () => {
