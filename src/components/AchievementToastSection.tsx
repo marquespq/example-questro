@@ -288,6 +288,79 @@ export function AchievementToastSection() {
         </div>
       </div>
 
+      {/* Code Example */}
+      <div
+        style={{
+          padding: "20px",
+          backgroundColor: "#f8fafc",
+          border: "2px solid #e2e8f0",
+          borderRadius: "12px",
+          marginBottom: "24px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "14px",
+            fontWeight: 700,
+            color: "#0f172a",
+            marginBottom: "12px",
+          }}
+        >
+          💻 Code Example
+        </div>
+        <pre
+          style={{
+            backgroundColor: "#1e293b",
+            color: "#e2e8f0",
+            padding: "16px",
+            borderRadius: "8px",
+            overflow: "auto",
+            fontSize: "13px",
+            lineHeight: "1.6",
+            margin: 0,
+            textAlign: "left",
+          }}
+        >
+          <code>{`import { useState } from 'react';
+import { AchievementToast } from 'questro/achievement-toast';
+import type { Achievement } from 'questro/achievement-toast';
+
+function GameUI() {
+  const [achievement, setAchievement] = 
+    useState<Achievement | null>(null);
+
+  const unlockAchievement = () => {
+    setAchievement({
+      title: "Speed Demon",
+      description: "Complete 10 actions in under a minute",
+      icon: "⚡",
+      type: "badge",
+      rarity: "rare",
+      reward: { 
+        points: 100, 
+        badge: "Speed Demon Badge" 
+      }
+    });
+  };
+
+  return (
+    <>
+      <button onClick={unlockAchievement}>
+        Unlock Achievement
+      </button>
+      
+      {achievement && (
+        <AchievementToast
+          achievement={achievement}
+          onClose={() => setAchievement(null)}
+        />
+      )}
+    </>
+  );
+}`}</code>
+        </pre>
+      </div>
+
       {/* Achievement Toast Modal */}
       {currentAchievement && (
         <AchievementToast

@@ -366,6 +366,86 @@ export function DailyChallengeSection() {
           completing daily
         </div>
       </div>
+
+      {/* Code Example */}
+      <div
+        style={{
+          padding: "20px",
+          backgroundColor: "#f8fafc",
+          border: "2px solid #e2e8f0",
+          borderRadius: "12px",
+          marginTop: "24px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "14px",
+            fontWeight: 700,
+            color: "#0f172a",
+            marginBottom: "12px",
+          }}
+        >
+          💻 Code Example
+        </div>
+        <pre
+          style={{
+            backgroundColor: "#1e293b",
+            color: "#e2e8f0",
+            padding: "16px",
+            borderRadius: "8px",
+            overflow: "auto",
+            fontSize: "13px",
+            lineHeight: "1.6",
+            margin: 0,
+            textAlign: "left",
+          }}
+        >
+          <code>{`import { 
+  useDailyChallenge,
+  DailyChallengeCard,
+  ChallengeTimer
+} from 'questro/daily-challenge';
+
+function DailyChallenge() {
+  const {
+    challenge,
+    streak,
+    completedToday,
+    progress,
+    addProgress,
+    complete
+  } = useDailyChallenge();
+
+  const handleProgress = () => {
+    addProgress(10); // Add 10% progress
+  };
+
+  return (
+    <div>
+      <h2>Streak: {streak} days 🔥</h2>
+      
+      {challenge && (
+        <>
+          <DailyChallengeCard
+            challenge={challenge}
+            progress={progress}
+            onAction={complete}
+          />
+          
+          <button onClick={handleProgress}>
+            Make Progress
+          </button>
+          
+          <ChallengeTimer 
+            timeUntilReset={timeUntilReset}
+          />
+        </>
+      )}
+    </div>
+  );
+}`}</code>
+        </pre>
+      </div>
     </div>
   );
 }

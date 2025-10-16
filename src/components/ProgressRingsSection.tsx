@@ -395,6 +395,78 @@ export function ProgressRingsSection() {
           <strong>📱 Responsive:</strong> SVG-based, scales perfectly
         </div>
       </div>
+
+      {/* Code Example */}
+      <div
+        style={{
+          padding: "20px",
+          backgroundColor: "#f8fafc",
+          border: "2px solid #e2e8f0",
+          borderRadius: "12px",
+          marginTop: "24px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "14px",
+            fontWeight: 700,
+            color: "#0f172a",
+            marginBottom: "12px",
+          }}
+        >
+          💻 Code Example
+        </div>
+        <pre
+          style={{
+            backgroundColor: "#1e293b",
+            color: "#e2e8f0",
+            padding: "16px",
+            borderRadius: "8px",
+            overflow: "auto",
+            fontSize: "13px",
+            lineHeight: "1.6",
+            margin: 0,
+            textAlign: "left",
+          }}
+        >
+          <code>{`import { ProgressRings } from 'questro/progress-rings';
+import type { RingData } from 'questro/progress-rings';
+
+function StatsDisplay() {
+  const rings: RingData[] = [
+    {
+      value: 75,
+      max: 100,
+      color: "#10b981",
+      label: "Health"
+    },
+    {
+      value: 60,
+      max: 100,
+      color: "#f59e0b",
+      label: "Energy"
+    },
+    {
+      value: 45,
+      max: 100,
+      color: "#6366f1",
+      label: "Focus"
+    }
+  ];
+
+  return (
+    <ProgressRings
+      rings={rings}
+      size={300}
+      strokeWidth={12}
+      gap={16}
+      centerText="70%"
+      centerLabel="Overall"
+    />
+  );
+}`}</code>
+        </pre>
+      </div>
     </div>
   );
 }

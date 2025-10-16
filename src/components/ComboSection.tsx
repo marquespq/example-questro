@@ -291,6 +291,66 @@ export function ComboSection() {
             inactivity
           </div>
         </div>
+
+        {/* Code Example */}
+        <div
+          style={{
+            marginTop: "1.5rem",
+            padding: "1rem",
+            backgroundColor: "#f8fafc",
+            border: "2px solid #e2e8f0",
+            borderRadius: "12px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "0.875rem",
+              fontWeight: 700,
+              color: "#0f172a",
+              marginBottom: "0.75rem",
+            }}
+          >
+            💻 Code Example
+          </div>
+          <pre
+            style={{
+              backgroundColor: "#1e293b",
+              color: "#e2e8f0",
+              padding: "1rem",
+              borderRadius: "8px",
+              overflow: "auto",
+              fontSize: "0.8rem",
+              lineHeight: "1.6",
+              margin: 0,
+              textAlign: "left",
+            }}
+          >
+            <code>{`import { useCombo, ComboMeter } from 'questro/combo';
+
+function GameAction() {
+  const { combo, multiplier, addAction, reset } = useCombo();
+
+  const handleAction = () => {
+    addAction('user-action');
+    // Award points with multiplier
+    const points = 10 * multiplier;
+    console.log(\`Earned \${points} points!\`);
+  };
+
+  return (
+    <div>
+      <ComboMeter 
+        combo={combo} 
+        multiplier={multiplier}
+      />
+      <button onClick={handleAction}>
+        Perform Action (x{multiplier})
+      </button>
+    </div>
+  );
+}`}</code>
+          </pre>
+        </div>
       </div>
 
       {/* Milestone Popup */}

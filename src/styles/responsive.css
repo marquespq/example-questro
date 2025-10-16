@@ -1329,6 +1329,7 @@ html {
   border: 1px solid rgba(255, 107, 107, 0.2);
   max-width: 100%;
   word-wrap: break-word;
+  text-align: left;
 }
 
 .quickstart-code code {
@@ -1757,6 +1758,7 @@ html {
   margin: 0;
   max-width: 100%;
   word-wrap: break-word;
+  text-align: left;
 }
 
 .playground-code code {
